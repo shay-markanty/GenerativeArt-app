@@ -1,8 +1,8 @@
 // Generated from the production build. A new asset changes this version.
 const SCOPE = self.registration.scope;
 const PREFIX = 'fractal-lab:' + SCOPE + ':';
-const CACHE = PREFIX + "5177196b2d6b89d6";
-const ASSETS = ["assets/fractal-worker-D8ffHVeO.js","assets/index-BmqQsfCo.css","assets/index-C3SEgs8l.js","icons/icon-180.png","icons/icon-192.png","icons/icon-512.png","icons/icon.svg","index.html","manifest.webmanifest"].map(path => new URL(path, SCOPE).href);
+const CACHE = PREFIX + "433d75a130add442";
+const ASSETS = ["assets/fractal-worker-D8ffHVeO.js","assets/index-BmqQsfCo.css","assets/index-WGvoFvdN.js","icons/icon-180.png","icons/icon-192.png","icons/icon-512.png","icons/icon.svg","index.html","manifest.webmanifest"].map(path => new URL(path, SCOPE).href);
 const INDEX = new URL('index.html', SCOPE).href;
 
 self.addEventListener('install', event => {
