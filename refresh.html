@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#080d1b" />
+  <title>Update Fractal Lab</title>
+  <style>
+    :root { color-scheme: dark; font-family: system-ui, sans-serif; background: #080d1b; color: #eee8dc; }
+    body { max-width: 440px; margin: 15vh auto; padding: 24px; line-height: 1.65; }
+    h1 { color: #edc77e; font-weight: 400; }
+    p { color: #bfc4cf; }
+    button, a { font: inherit; color: #edc77e; }
+    button { background: #152c60; border: 1px solid #a98649; border-radius: 6px; padding: 12px 18px; cursor: pointer; }
+    [hidden] { display: none; }
+  </style>
+</head>
+<body>
+  <h1>Updating Fractal Lab</h1>
+  <p id="status" role="status">Downloading the latest app, including everything needed offline…</p>
+  <p>This restarts the artwork. Your other websites and browsing data are unaffected.</p>
+  <button id="retry" hidden>Try again</button>
+  <p><a href="./">Return to Fractal Lab</a></p>
+  <script type="module">
+    const status = document.getElementById('status');
+    const retry = document.getElementById('retry');
+
+    function installed(worker) {
+      return new Promise((resolve, reject) => {
+        const timer = setTimeout(() => finish(new Error('The download is taking too long. Check your connection and try again.')), 45000);
+        const changed = () => {
+          if (worker.state === 'installed' || worker.state === 'activated') finish();
+          else if (worker.state === 'redundant') finish(new Error('The complete app could not be downloaded. Reconnect and try again.'));
+        };
+        function finish(error) {
+          clearTimeout(timer);
+          worker.removeEventListener('statechange', changed);
+          error ? reject(error) : resolve();
+        }
+        worker.addEventListener('statechange', changed);
+        changed();
+      });
+    }
+
+    async function update() {
+      retry.hidden = true;
+      try {
+        if (!('serviceWorker' in navigator) || !window.isSecureContext) throw new Error('Open the HTTPS app link in Chrome to update.');
+        const registration = await navigator.serviceWorker.register(new URL('sw.js', location.href), { updateViaCache: 'none' });
+        await registration.update();
+        const installing = registration.installing;
+        if (installing) await installed(installing);
+        const waiting = registration.waiting;
+        if (waiting) {
+          status.textContent = 'Download complete. Switching to the latest app…';
+          await new Promise((resolve, reject) => {
+            const timer = setTimeout(() => { navigator.serviceWorker.removeEventListener('controllerchange', changed); reject(new Error('The update could not finish. Try again.')); }, 15000);
+            function changed() { clearTimeout(timer); navigator.serviceWorker.removeEventListener('controllerchange', changed); resolve(); }
+            navigator.serviceWorker.addEventListener('controllerchange', changed);
+            waiting.postMessage({ type: 'ACTIVATE_UPDATE' });
+          });
+        }
+        await navigator.serviceWorker.ready;
+        location.replace(new URL('./', location.href).href);
+      } catch (error) {
+        status.textContent = error instanceof Error && error.name === 'Error' ? error.message :
+          'Connect to the internet and try again. Your saved app is still available.';
+        retry.hidden = false;
+      }
+    }
+    retry.addEventListener('click', update);
+    void update();
+  </script>
+</body>
+</html>

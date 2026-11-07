@@ -1,8 +1,8 @@
 // Generated from the production build. A new asset changes this version.
 const SCOPE = self.registration.scope;
 const PREFIX = 'fractal-lab:' + SCOPE + ':';
-const CACHE = PREFIX + "433d75a130add442";
-const ASSETS = ["assets/fractal-worker-D8ffHVeO.js","assets/index-BmqQsfCo.css","assets/index-WGvoFvdN.js","icons/icon-180.png","icons/icon-192.png","icons/icon-512.png","icons/icon.svg","index.html","manifest.webmanifest"].map(path => new URL(path, SCOPE).href);
+const CACHE = PREFIX + "a5b5507196be57db";
+const ASSETS = ["assets/fractal-worker-D8ffHVeO.js","assets/index-BWIgulho.css","assets/index-DZqBDFqQ.js","icons/icon-180.png","icons/icon-192.png","icons/icon-512.png","icons/icon.svg","index.html","manifest.webmanifest","refresh.html"].map(path => new URL(path, SCOPE).href);
 const INDEX = new URL('index.html', SCOPE).href;
 
 self.addEventListener('install', event => {
@@ -19,6 +19,12 @@ self.addEventListener('activate', event => {
   })());
 });
 
+self.addEventListener('message', event => {
+  // Only an explicit update request switches versions while app windows are open.
+  // The browser cannot put this worker in waiting until precaching has succeeded.
+  if (event.data?.type === 'ACTIVATE_UPDATE') event.waitUntil(self.skipWaiting());
+});
+
 self.addEventListener('fetch', event => {
   if (event.request.method !== 'GET') return;
   const url = new URL(event.request.url);
@@ -33,4 +39,4 @@ self.addEventListener('fetch', event => {
     return await cache.match(entry ? INDEX : url.href, { ignoreVary: true }) || fetch(event.request);
   })());
 });
-// Do not skip waiting: let open pages finish using their matching asset version.
+// Normal updates wait. The refresh page can explicitly request activation.
