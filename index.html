@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#080d1b" />
+    <link rel="icon" type="image/svg+xml" href="./icons/icon.svg" />
+    <link rel="apple-touch-icon" href="./icons/icon-180.png" />
+    <link rel="manifest" href="./manifest.webmanifest" />
+    <meta name="apple-mobile-web-app-title" content="Fractal Lab" />
+    <title>Fractal Lab — Ornamental studies</title>
+    <script type="module" crossorigin src="./assets/index-C3SEgs8l.js"></script>
+    <link rel="stylesheet" crossorigin href="./assets/index-BmqQsfCo.css">
+  </head>
+  <body>
+    <canvas id="art" aria-label="Animated recursive ornamental artwork"></canvas>
+    <header class="masthead">
+      <div><span class="eyebrow">Generative studies / 001</span><h1>Fractal Lab<span class="title-dot">.</span></h1></div>
+      <button id="toggle-panel" type="button" aria-controls="controls" aria-expanded="true"><span aria-hidden="true">☰</span><span id="menu-toggle-label">Hide menu</span><kbd>H</kbd></button>
+    </header>
+    <aside id="controls" aria-label="Artwork controls">
+      <div class="panel-heading"><span class="eyebrow">The evolving ornament</span><div class="panel-tools"><span class="live-dot" aria-hidden="true"></span><button id="math-help" type="button" class="math-help-button" aria-label="Open the math guide" aria-haspopup="dialog" aria-controls="math-guide">?</button></div></div>
+      <p class="intro">Travel through scale.<br />Let the architecture unfold.</p>
+      <label class="tooltip-preference" for="tooltips-enabled"><input id="tooltips-enabled" type="checkbox" checked /> Show tooltips</label>
+      <fieldset>
+        <legend>01 <span>Motion</span></legend>
+        <button id="auto-pilot" class="auto-pilot" aria-pressed="false">Auto pilot</button>
+        <p id="motion-control-note" class="note" hidden>Auto pilot controls zoom, rotation, Swirl rate, evolution, curve parameters, Warp, Edge weave, and ring settings. Stop it to edit those values. Fractal mode, depth, repetitions, and symmetry stay adjustable.</p>
+        <div class="button-pair"><button id="camera-pause" aria-pressed="false">Pause camera</button><button id="evolution-pause" aria-pressed="false">Pause evolution</button></div>
+        <label for="zoom-speed">Inward zoom <output id="zoom-speed-value"></output></label>
+        <input id="zoom-speed" type="range" min="0" max="0.2" step="0.001" value="0.035" />
+        <label for="evolution-speed">Evolution <output id="evolution-speed-value"></output></label>
+        <input id="evolution-speed" type="range" min="0" max="2" step="0.01" value="0.6" />
+        <label for="rotation-speed">Rotation <output id="rotation-speed-value"></output></label>
+        <input id="rotation-speed" type="range" min="-0.08" max="0.08" step="0.001" value="0.006" />
+        <label for="whirlpool-speed">Swirl rate <output id="whirlpool-speed-value"></output></label>
+        <input id="whirlpool-speed" type="range" min="-0.15" max="0.15" step="0.001" value="0.06" aria-describedby="whirlpool-note" />
+        <p class="note" id="whirlpool-note">A gentle swirl, then back to petals. Positive starts clockwise; negative starts counterclockwise. Zero or Pause camera holds the pulse. Twist never builds up.</p>
+        <label for="ring-size">Ring size <output id="ring-size-value"></output></label>
+        <input id="ring-size" type="range" min="0.05" max="0.3" step="0.001" value="0.15" />
+        <label for="ring-frequency">Ring frequency <output id="ring-frequency-value"></output></label>
+        <input id="ring-frequency" type="range" min="0.25" max="2.5" step="0.01" value="1" />
+        <label for="ring-velocity">Ring velocity <output id="ring-velocity-value"></output></label>
+        <input id="ring-velocity" type="range" min="-1" max="1" step="0.01" value="1" aria-describedby="ring-note" />
+        <p class="note" id="ring-note">Size sets thickness; frequency sets the travel and repeat rate. Velocity: +1 outward, 0 stationary, −1 inward.</p>
+      </fieldset>
+      <fieldset>
+        <legend>02 <span>Structure</span></legend>
+        <label for="fractal-mode">Fractal mode</label>
+        <select id="fractal-mode" aria-describedby="fractal-mode-note"></select>
+        <p class="note" id="fractal-mode-note"></p>
+        <label for="curve-parameter"><span id="curve-parameter-label">Bend angle</span><output id="curve-parameter-value"></output></label>
+        <input id="curve-parameter" type="range" min="15" max="50" step="any" value="45" aria-describedby="curve-parameter-note" />
+        <p class="note" id="curve-parameter-note"></p>
+        <label for="symmetry">Symmetry <output id="symmetry-value"></output></label>
+        <input id="symmetry" type="range" min="3" max="16" step="1" value="8" />
+        <label for="layers">Fractal depth <output id="layers-value"></output></label>
+        <input id="layers" type="range" min="1" max="4" step="1" value="4" aria-describedby="structure-note" />
+        <label for="repetitions">Motif repetitions <output id="repetitions-value"></output></label>
+        <input id="repetitions" type="range" min="1" max="7" step="1" value="3" aria-describedby="structure-note" />
+        <p class="note" id="structure-note">Depth replaces curve segments. Repetitions adds smaller copies of the motif.</p>
+        <label for="edge-weave">Edge weave <output id="edge-weave-value"></output></label>
+        <input id="edge-weave" type="range" min="0" max="1" step="0.01" value="1" />
+        <label for="warp">Warp <output id="warp-value"></output></label>
+        <input id="warp" type="range" min="0" max="1" step="0.01" value="0.3" />
+        <div class="seed-row"><label for="seed">World seed</label><input id="seed" type="number" min="0" max="999999" step="1" value="104729" /></div>
+      </fieldset>
+      <fieldset>
+        <legend>03 <span>Palette cycle</span></legend>
+        <button id="palette-pause" aria-pressed="false">Pause colors</button>
+        <p class="note" id="palette-status">Ember / Cobalt</p>
+        <label for="palette-hold">Hold each palette <output id="palette-hold-value"></output></label>
+        <input id="palette-hold" type="range" min="2" max="60" step="1" value="20" />
+        <label for="palette-blend">Blend duration <output id="palette-blend-value"></output></label>
+        <input id="palette-blend" type="range" min="2" max="30" step="1" value="8" />
+      </fieldset>
+      <details>
+        <summary>Coordinates & rendering</summary>
+        <p class="note">Pause a clock to revisit an exact coordinate. Seed changes select a new world.</p>
+        <label for="zoom-position">Log zoom</label><input id="zoom-position" type="number" min="0" max="1000" step="0.01" value="0" />
+        <label for="evolution-position">Evolution time</label><input id="evolution-position" type="number" min="0" max="100000" step="0.1" value="0" />
+        <label for="ripple-position">Ripple time</label><input id="ripple-position" type="number" min="-100000" max="100000" step="0.1" value="0" />
+        <label for="palette-position">Palette position</label><input id="palette-position" type="number" min="0" max="100000" step="0.01" value="0" />
+        <label for="rotation-position">Rotation (radians)</label><input id="rotation-position" type="number" min="-1000" max="1000" step="0.01" value="0" />
+        <label for="whirlpool-position">Swirl phase (radians)</label><input id="whirlpool-position" type="number" min="-100000" max="100000" step="0.01" value="0" />
+        <label for="quality">Render scale</label><select id="quality"><option value="0.75">Economy · 75%</option><option value="1">Standard · 100%</option><option value="1.5" selected>Fine · 150%</option></select>
+      </details>
+      <div class="footer-actions"><button id="reset">Reset study</button><button id="fullscreen">Fullscreen ↗</button></div>
+      <p class="note" id="offline-status" role="status">Preparing offline copy…</p>
+      <p class="key-hints"><kbd>Space</kbd> pause all <span>·</span> <kbd>H</kbd> hide <span>·</span> <kbd>F</kbd> fullscreen</p>
+    </aside>
+    <footer class="caption"><span id="palette-caption">EMBER / COBALT</span><span id="status" role="status">Starting renderer…</span></footer>
+    <div id="error" role="alert" hidden><h2>Unable to render</h2><p id="error-message"></p></div>
+  </body>
+</html>

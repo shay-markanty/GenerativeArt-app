@@ -1,0 +1,16 @@
+{
+  "id": "./",
+  "name": "Fractal Lab",
+  "short_name": "Fractal Lab",
+  "description": "Evolving ornamental fractals and reversible whirlpool motion, available offline.",
+  "lang": "en",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#080d1b",
+  "theme_color": "#080d1b",
+  "icons": [
+    { "src": "icons/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" }
+  ]
+}
