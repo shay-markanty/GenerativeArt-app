@@ -1,5 +1,5 @@
 <!doctype html>
-<html data-fractal-build="a5b5507196be57db" lang="en">
+<html data-fractal-build="e21e4a3209cf354b" lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -9,23 +9,23 @@
     <link rel="manifest" href="./manifest.webmanifest" />
     <meta name="apple-mobile-web-app-title" content="Fractal Lab" />
     <title>Fractal Lab — Ornamental studies</title>
-    <script type="module" crossorigin src="./assets/index-DZqBDFqQ.js"></script>
+    <script type="module" crossorigin src="./assets/index-C9cMikE-.js"></script>
     <link rel="stylesheet" crossorigin href="./assets/index-BWIgulho.css">
   </head>
   <body>
     <canvas id="art" aria-label="Animated recursive ornamental artwork"></canvas>
     <header class="masthead">
       <div><span class="eyebrow">Generative studies / 001</span><h1>Fractal Lab<span class="title-dot">.</span></h1></div>
-      <button id="toggle-panel" type="button" aria-controls="controls" aria-expanded="true"><span aria-hidden="true">☰</span><span id="menu-toggle-label">Hide menu</span><kbd>H</kbd></button>
+      <button id="toggle-panel" type="button" aria-controls="controls" aria-expanded="false"><span aria-hidden="true">☰</span><span id="menu-toggle-label">Show menu</span><kbd>H</kbd></button>
     </header>
-    <aside id="controls" aria-label="Artwork controls">
+    <aside id="controls" aria-label="Artwork controls" hidden>
       <div class="panel-heading"><span class="eyebrow">The evolving ornament</span><div class="panel-tools"><span class="live-dot" aria-hidden="true"></span><button id="math-help" type="button" class="math-help-button" aria-label="Open the math guide" aria-haspopup="dialog" aria-controls="math-guide">?</button></div></div>
       <p class="intro">Travel through scale.<br />Let the architecture unfold.</p>
       <label class="tooltip-preference" for="tooltips-enabled"><input id="tooltips-enabled" type="checkbox" checked /> Show tooltips</label>
       <fieldset>
         <legend>01 <span>Motion</span></legend>
-        <button id="auto-pilot" class="auto-pilot" aria-pressed="false">Auto pilot</button>
-        <p id="motion-control-note" class="note" hidden>Auto pilot controls zoom, rotation, Swirl rate, evolution, curve parameters, Warp, Edge weave, and ring settings. Stop it to edit those values. Fractal mode, depth, repetitions, and symmetry stay adjustable.</p>
+        <button id="auto-pilot" class="auto-pilot" aria-pressed="true">Stop auto pilot</button>
+        <p id="motion-control-note" class="note">Auto pilot controls zoom, rotation, Swirl rate, evolution, curve parameters, Warp, Edge weave, and ring settings. Stop it to edit those values. Fractal mode, depth, repetitions, and symmetry stay adjustable.</p>
         <div class="button-pair"><button id="camera-pause" aria-pressed="false">Pause camera</button><button id="evolution-pause" aria-pressed="false">Pause evolution</button></div>
         <label for="zoom-speed">Inward zoom <output id="zoom-speed-value"></output></label>
         <input id="zoom-speed" type="range" min="0" max="0.2" step="0.001" value="0.035" />
@@ -57,7 +57,7 @@
         <label for="layers">Fractal depth <output id="layers-value"></output></label>
         <input id="layers" type="range" min="1" max="4" step="1" value="4" aria-describedby="structure-note" />
         <label for="repetitions">Motif repetitions <output id="repetitions-value"></output></label>
-        <input id="repetitions" type="range" min="1" max="7" step="1" value="3" aria-describedby="structure-note" />
+        <input id="repetitions" type="range" min="1" max="7" step="1" value="6" aria-describedby="structure-note" />
         <p class="note" id="structure-note">Depth replaces curve segments. Repetitions adds smaller copies of the motif.</p>
         <label for="edge-weave">Edge weave <output id="edge-weave-value"></output></label>
         <input id="edge-weave" type="range" min="0" max="1" step="0.01" value="1" />
@@ -68,7 +68,7 @@
       <fieldset>
         <legend>03 <span>Palette cycle</span></legend>
         <button id="palette-pause" aria-pressed="false">Pause colors</button>
-        <p class="note" id="palette-status">Ember / Cobalt</p>
+        <p class="note" id="palette-status">Choosing palette…</p>
         <label for="palette-hold">Hold each palette <output id="palette-hold-value"></output></label>
         <input id="palette-hold" type="range" min="2" max="60" step="1" value="20" />
         <label for="palette-blend">Blend duration <output id="palette-blend-value"></output></label>
@@ -90,7 +90,7 @@
       <p class="app-update"><a id="update-app" href="/refresh.html">Check for updates</a><span id="app-version"></span></p>
       <p class="key-hints"><kbd>Space</kbd> pause all <span>·</span> <kbd>H</kbd> hide <span>·</span> <kbd>F</kbd> fullscreen</p>
     </aside>
-    <footer class="caption"><span id="palette-caption">EMBER / COBALT</span><span id="status" role="status">Starting renderer…</span></footer>
+    <footer class="caption"><span id="palette-caption">CHOOSING PALETTE…</span><span id="status" role="status">Starting renderer…</span></footer>
     <div id="error" role="alert" hidden><h2>Unable to render</h2><p id="error-message"></p></div>
   </body>
 </html>
