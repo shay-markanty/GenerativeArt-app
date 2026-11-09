@@ -1,13 +1,22 @@
 // Generated from the production build. A new asset changes this version.
 const SCOPE = self.registration.scope;
 const PREFIX = 'fractal-lab:' + SCOPE + ':';
-const CACHE = PREFIX + "0bbac8f01524cb2e";
+const CACHE = PREFIX + "10195e5b3ea57902";
 const ASSETS = ["assets/fractal-worker-D8ffHVeO.js","assets/index-BWIgulho.css","assets/index-C9cMikE-.js","icons/icon-180.png","icons/icon-192.png","icons/icon-512.png","icons/icon.svg","index.html","manifest.webmanifest","refresh.html"].map(path => new URL(path, SCOPE).href);
 const INDEX = new URL('index.html', SCOPE).href;
+const BUILD = "10195e5b3ea57902";
 
 self.addEventListener('install', event => {
   // Only a complete download can become the next offline app.
-  event.waitUntil(caches.open(CACHE).then(cache => cache.addAll(ASSETS)));
+  event.waitUntil((async () => {
+    const cache = await caches.open(CACHE);
+    // A fresh worker must not precache HTML from the browser's older HTTP cache.
+    await cache.addAll(ASSETS.map(url => new Request(url, { cache: 'reload' })));
+    const entry = await cache.match(INDEX, { ignoreVary: true });
+    if (!entry || !(await entry.text()).includes('data-fractal-build="' + BUILD + '"')) {
+      throw new Error('The downloaded app does not match this update. Try again online.');
+    }
+  })());
 });
 
 self.addEventListener('activate', event => {
