@@ -1,7 +1,7 @@
 // Generated from the production build. A new asset changes this version.
 const SCOPE = self.registration.scope;
 const PREFIX = 'fractal-lab:' + SCOPE + ':';
-const CACHE = PREFIX + "e21e4a3209cf354b";
+const CACHE = PREFIX + "0bbac8f01524cb2e";
 const ASSETS = ["assets/fractal-worker-D8ffHVeO.js","assets/index-BWIgulho.css","assets/index-C9cMikE-.js","icons/icon-180.png","icons/icon-192.png","icons/icon-512.png","icons/icon.svg","index.html","manifest.webmanifest","refresh.html"].map(path => new URL(path, SCOPE).href);
 const INDEX = new URL('index.html', SCOPE).href;
 
